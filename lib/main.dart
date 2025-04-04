@@ -15,22 +15,31 @@ class ShoeShopApp extends StatelessWidget {
 }
 class ShoeShopScreen extends StatelessWidget{
   final List<String> shoeImages = [
-    'assets/shoes/shoe1.jpg',
-    'assets/shoes/shoe2.jpg',
-    'assets/shoes/shoe3.jpg',
-    'assets/shoes/shoe4.jpg',
-    'assets/shoes/shoe5.jpg',
-    'assets/shoes/shoe6.jpg',
+    'assets/shoes/shoe1.png',
+    'assets/shoes/shoe2.png',
+    'assets/shoes/shoe3.png',
+    'assets/shoes/shoe4.png',
+    'assets/shoes/shoe5.png',
+    'assets/shoes/shoe6.png',
   ];
 
   final List<String> brandNames = [
-    'Purple',
-    'White',
-    'Blue',
-    'Pink',
-    'Black',
-    'RedYellowBlue',
+    'Nike',
+    'Nike',
+    'Nike',
+    'New Balance',
+    'Nike',
+    'Nike',
   ];
+
+  final List<String> brandDescriptions = [
+  'FX5 Jumpster',
+  'Runner Pro',
+  'Trend Max ',
+  'Lightweight Speedster',
+  'Classic Runner 7',
+  'Sneakster Supreme',
+];
 
 final List<String> brandPrices = [
   '\$40',
@@ -44,65 +53,141 @@ final List<String> brandPrices = [
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Shoe Shop'),
-        centerTitle: true,
-        ),
-        body: GridView.builder(
-          padding: EdgeInsets.all(10),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 0.75,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70),
+        child: AppBar(
+        backgroundColor: Colors.grey[100],
+        elevation: 0,
+        title: Text(
+          'Sneakers',
+          style: TextStyle(
+            fontSize: 38,
+            fontWeight: FontWeight.w900,
           ),
-          itemCount: shoeImages.length,
-          itemBuilder: (context, index) {
-            return Card( 
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+        ),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.swap_vert),
+            color: Colors.black,
+            onPressed: (){},
+          ),
+          IconButton(
+            icon: Icon(Icons.filter_alt_outlined),
+            color: Colors.black,
+            onPressed: (){},
+          ),
+        ]
+        ),
+      ),
+        backgroundColor: Colors.grey[100],
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 1.0),
+              child: Text(
+                ' 25 products found',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.grey[700],
                 ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          shoeImages[index],
-                          fit: BoxFit.cover,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemCount: shoeImages.length,
+                  itemBuilder: (context, index) {
+                    return Card( 
+                      color: Colors.white,
+                        elevation: 0,
+                        
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                         ),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Stack(
+                              children: [
+                                ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Image.asset(
+                                  shoeImages[index],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                ),
 
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            brandNames[index],
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                              ),
+                              Positioned(
+                                top: 10,
+                                right: 10,
+                                child: IconButton(
+                                  icon: Icon(Icons.favorite_border),
+                                  color: Colors.black,
+                                  onPressed: () {
+                                    
+                                  },
+                                ),
+                              ),
+                              ],
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            brandPrices[index],
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueGrey,
+                            Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                    brandNames[index],
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      )
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    brandDescriptions[index],
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    brandPrices[index],
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    
+                                    ),
+                                  ),
+                                ],
+                              ),
+                               
                             ),
-                          ),
-                        ],
-                      ),
-                       
-                    ),
-                  ],
+                          ],
+                        ),
+                    );
+                  },
                 ),
-            );
-          },
-
+              ),
+            ),
+          ],
         ),
       );
   }
