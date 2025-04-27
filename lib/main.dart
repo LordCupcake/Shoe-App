@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'shoe_details.dart';
 
 void main(){
   runApp(ShoeShopApp());
@@ -27,7 +28,7 @@ class ShoeShopScreen extends StatelessWidget{
     'Nike',
     'Nike',
     'Nike',
-    'New Balance',
+    'Nike',
     'Nike',
     'Nike',
   ];
@@ -36,7 +37,7 @@ class ShoeShopScreen extends StatelessWidget{
   'FX5 Jumpster',
   'Runner Pro',
   'Trend Max ',
-  'Lightweight Speedster',
+  'Lightweight Speed',
   'Classic Runner 7',
   'Sneakster Supreme',
 ];
@@ -70,11 +71,13 @@ final List<String> brandPrices = [
           IconButton(
             icon: Icon(Icons.swap_vert),
             color: Colors.black,
+            iconSize: 30,
             onPressed: (){},
           ),
           IconButton(
             icon: Icon(Icons.filter_alt_outlined),
             color: Colors.black,
+            iconSize: 30,
             onPressed: (){},
           ),
         ]
@@ -103,44 +106,58 @@ final List<String> brandPrices = [
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
-                    childAspectRatio: 0.7,
+                    childAspectRatio: 0.8,
                   ),
                   itemCount: shoeImages.length,
                   itemBuilder: (context, index) {
-                    return Card( 
-                      color: Colors.white,
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ShoeDetailsPage(
+                              image: shoeImages[index],
+                              name: brandNames[index],
+                              description: brandDescriptions[index],
+                              price: brandPrices[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        color: Colors.white,
                         elevation: 0,
-                        
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
                           children: [
                             Expanded(
                               child: Stack(
-                              children: [
-                                ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image.asset(
-                                  shoeImages[index],
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                ),
-
-                              ),
-                              Positioned(
-                                top: 10,
-                                right: 10,
-                                child: IconButton(
-                                  icon: Icon(Icons.favorite_border),
-                                  color: Colors.black,
-                                  onPressed: () {
-                                    
-                                  },
-                                ),
-                              ),
-                              ],
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height: 120,
+                                      child: Image.asset(
+                                        shoeImages[index],
+                                        fit: BoxFit.cover,
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 10,
+                                    right: 10,
+                                    child: IconButton(
+                                      icon: Icon(Icons.favorite_border),
+                                      color: Colors.black,
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             Padding(
@@ -151,11 +168,11 @@ final List<String> brandPrices = [
                                   SizedBox(
                                     width: double.infinity,
                                     child: Text(
-                                    brandNames[index],
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      )
+                                      brandNames[index],
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 10),
@@ -173,15 +190,14 @@ final List<String> brandPrices = [
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                    
                                     ),
                                   ),
                                 ],
                               ),
-                               
                             ),
                           ],
                         ),
+                      ),
                     );
                   },
                 ),
