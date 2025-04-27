@@ -51,6 +51,52 @@ final List<String> brandPrices = [
   '\$129',
   ];
 
+final List<List<String>> shoeAngles = [
+  [
+      'assets/shoe1/angle1.jpg',
+      'assets/shoe1/angle2.jpg',
+      'assets/shoe1/angle3.jpg',
+      'assets/shoe1/angle4.jpg',
+      'assets/shoe1/angle5.png',
+    ],
+    [
+      'assets/shoe2/angle1.jpg',
+      'assets/shoe2/angle2.jpg',
+      'assets/shoe2/angle3.jpg',
+      'assets/shoe2/angle4.jpg',
+      'assets/shoe2/angle5.png',
+    ],
+    [
+      'assets/shoe3/angle1.jpg',
+      'assets/shoe3/angle2.jpg',
+      'assets/shoe3/angle3.jpg',
+      'assets/shoe3/angle4.jpg',
+      'assets/shoe3/angle5.png',
+    ],
+    [
+      'assets/shoe4/angle1.jpg',
+      'assets/shoe4/angle2.jpg',
+      'assets/shoe4/angle3.jpg',
+      'assets/shoe4/angle4.jpg',
+      'assets/shoe4/angle5.png',
+    ],
+    [
+      'assets/shoe5/angle1.jpg',
+      'assets/shoe5/angle2.jpg',
+      'assets/shoe5/angle3.jpg',
+      'assets/shoe5/angle4.jpg',
+      'assets/shoe5/angle5.png',
+    ],
+    [
+      'assets/shoe6/angle1.jpg',
+      'assets/shoe6/angle2.jpg',
+      'assets/shoe6/angle3.jpg',
+      'assets/shoe6/angle4.jpg',
+      'assets/shoe6/angle5.png',
+  ],
+ 
+];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,6 +166,7 @@ final List<String> brandPrices = [
                               name: brandNames[index],
                               description: brandDescriptions[index],
                               price: brandPrices[index],
+                              angles: shoeAngles[index], 
                             ),
                           ),
                         );

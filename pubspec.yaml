@@ -53,6 +53,13 @@ dev_dependencies:
 flutter:
   assets:
     - assets/shoes/
+    - assets/backgrounds/
+    - assets/shoe1/
+    - assets/shoe2/
+    - assets/shoe3/
+    - assets/shoe4/
+    - assets/shoe5/
+    - assets/shoe6/
 
 
   # The following line ensures that the Material Icons font is
