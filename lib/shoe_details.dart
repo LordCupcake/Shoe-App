@@ -23,9 +23,12 @@ class _ShoeDetailsPageState extends State<ShoeDetailsPage> {
   int selectedSizeIndex = 37; 
   int selectedMeasurementIndex = 0; 
   bool isReadMore = false; 
+  int selectedAngleIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    final List<String> allAngles = [widget.image, ...widget.angles];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -52,7 +55,7 @@ class _ShoeDetailsPageState extends State<ShoeDetailsPage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.asset(
-                    widget.image,
+                    allAngles[selectedAngleIndex],
                     fit: BoxFit.cover,
                     width: 300,
                     height: 300,
@@ -64,20 +67,30 @@ class _ShoeDetailsPageState extends State<ShoeDetailsPage> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: widget.angles.map((img) => Card(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    margin: EdgeInsets.only(right: 10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        img,
-                        width: 60,
-                        height: 60,
-                        fit: BoxFit.cover,
+                  children: List.generate(allAngles.length, (index) {
+                    final img = allAngles[index];
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedAngleIndex = index;
+                        });
+                      },
+                      child: Card(
+                        elevation: selectedAngleIndex == index ? 6 : 2,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        margin: EdgeInsets.only(right: 10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            img,
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ),
-                  )).toList(),
+                    );
+                  }),
                 ),
               ),
               SizedBox(height: 25),
