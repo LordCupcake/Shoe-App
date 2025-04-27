@@ -160,14 +160,25 @@ final List<List<String>> shoeAngles = [
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => ShoeDetailsPage(
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 200),
+                            pageBuilder: (context, animation, secondaryAnimation) => ShoeDetailsPage(
                               image: shoeImages[index],
                               name: brandNames[index],
                               description: brandDescriptions[index],
                               price: brandPrices[index],
-                              angles: shoeAngles[index], 
+                              angles: shoeAngles[index],
                             ),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              final offsetAnimation = Tween<Offset>(
+                                begin: Offset(1.0, 0.0), 
+                                end: Offset.zero,        
+                              ).animate(animation);
+                              return SlideTransition(
+                                position: offsetAnimation,
+                                child: child,
+                              );
+                            },
                           ),
                         );
                       },
